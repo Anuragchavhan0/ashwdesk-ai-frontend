@@ -1,20 +1,35 @@
 import { useState } from 'react'
+import { useEffect } from 'react'
+import API from '../api/axios'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import Chat from '../components/Chat'
 
+import API from '../api/axios'
+
 function Dashboard() {
+
     const { user, logout } = useAuth()
     const navigate = useNavigate()
     const [activePage, setActivePage] = useState('overview')
     const [activeMode, setActiveMode] = useState('CODE')
+    const [chatCount, setChatCount] = useState(0)
     const [isDark, setIsDark] = useState(true)
 
     const theme = isDark ? dark : light
 
+    useEffect(() => {
+        API.get('/api/chat/count')
+            .then(res => setChatCount(res.data))
+            .catch(() => { })
+    }, [])
+
     const handleLogout = () => {
         logout()
         navigate('/login')
+
+
+
     }
 
     return (

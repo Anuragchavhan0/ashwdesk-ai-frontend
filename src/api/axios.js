@@ -1,19 +1,15 @@
-import axios from 'axios';
+import axios from 'axios'
 
 const API = axios.create({
-   baseURL: 'https://ashwdesk-ai-backend-production.up.railway.app' 
+    baseURL: 'https://ashwdesk-ai-backend-production.up.railway.app', // ✅ https:// added
 })
 
 API.interceptors.request.use((config) => {
-    const token = localStorage.getItem('token');
-    if ( token &&
-    !config.url.includes('/auth/login') &&
-    !config.url.includes('/auth/register')
-        
-    ) {
-        config.headers.Authorization = `Bearer ${token}`;
+    const token = localStorage.getItem('token')
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`
     }
-    return config;
-});
+    return config
+})
 
-export default API;
+export default API
