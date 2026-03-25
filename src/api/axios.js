@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: 'ashwdesk-ai-backend-production.up.railway.app'
+   baseURL: 'https://ashwdesk-ai-backend-production.up.railway.app' 
 })
 
 API.interceptors.request.use((config) => {
