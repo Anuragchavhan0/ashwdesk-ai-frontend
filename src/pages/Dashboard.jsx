@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import Chat from '../components/Chat'
 
-import API from '../api/axios'
+
 
 function Dashboard() {
 
