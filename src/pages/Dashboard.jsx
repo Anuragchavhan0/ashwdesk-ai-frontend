@@ -165,7 +165,7 @@ function Dashboard() {
                     </div>
                     <div style={{ ...styles.modelChip, background: theme.bg3, border: `1px solid ${theme.border}`, color: theme.text2 }}>
                         <div style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#5EC97A', flexShrink: 0 }}></div>
-                        gemini-2.0-flash
+                        gemini-2.5-flash
                     </div>
                 </div>
 

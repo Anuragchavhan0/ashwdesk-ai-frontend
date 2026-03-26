@@ -85,7 +85,7 @@ function Chat({ activeMode, setActiveMode, theme }) {
                     </div>
                 ))}
                 <div style={{ marginLeft:'auto', fontSize:'11px', color: t.text3 }}>
-                    gemini-2.0-flash · Enter to send
+                    gemini-2.5-flash · Enter to send
                 </div>
             </div>
 
