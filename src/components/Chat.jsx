@@ -5,10 +5,11 @@ function Chat({ activeMode, setActiveMode, theme }) {
     const [messages, setMessages] = useState([
         {
             role: 'ai',
-            text: `Hey! I'm Ashw, your ${activeMode === 'CODE' ? 'Code Assistant 💻'
-                    : activeMode === 'CAREER' ? 'Career Advisor 🎯'
-                        : 'AI Assistant 🧠'
-                }. How can I help you today?`
+            text: `Hey! I'm Ashw, your ${
+                activeMode === 'CODE' ? 'Code Assistant 💻'
+                : activeMode === 'CAREER' ? 'Career Advisor 🎯'
+                : 'AI Assistant 🧠'
+            }. How can I help you today?`
         }
     ])
     const [input, setInput] = useState('')
@@ -35,20 +36,12 @@ function Chat({ activeMode, setActiveMode, theme }) {
                 text: res.data.aiResponse
             }])
         } catch (err) {
-            const msg = err.response?.data?.message || err.response?.data
-            if (err.response?.status === 429) {
-                setMessages(prev => [...prev, {
-                    role: 'ai',
-                    text: '⏳ Daily limit of 20 messages reached! Come back tomorrow.'
-                }])
-            } else {
-                setMessages(prev => [...prev, {
-                    role: 'ai',
-                    text: '⚠️ Could not reach AI. Please try again!'
-                }])
-            }
+            setMessages(prev => [...prev, {
+                role: 'ai',
+                text: '⚠️ Could not reach AI. Please try again!'
+            }])
         } finally {
-            setMessages(false)
+            setLoading(false)
         }
     }
 
@@ -67,10 +60,10 @@ function Chat({ activeMode, setActiveMode, theme }) {
     }
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 56px)', overflow: 'hidden' }}>
+        <div style={{ display:'flex', flexDirection:'column', height:'calc(100vh - 56px)', overflow:'hidden' }}>
 
             {/* MODE PILLS */}
-            <div style={{ display: 'flex', gap: '8px', marginBottom: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+            <div style={{ display:'flex', gap:'8px', marginBottom:'16px', alignItems:'center', flexWrap:'wrap' }}>
                 {[
                     { id: 'CODE', label: '💻 Code Assistant' },
                     { id: 'CAREER', label: '🎯 Career Advisor' },
@@ -79,8 +72,8 @@ function Chat({ activeMode, setActiveMode, theme }) {
                     <div
                         key={m.id}
                         style={{
-                            padding: '4px 12px', borderRadius: '20px', fontSize: '12px',
-                            cursor: 'pointer',
+                            padding:'4px 12px', borderRadius:'20px', fontSize:'12px',
+                            cursor:'pointer',
                             border: `1px solid ${activeMode === m.id ? '#C9A84C' : t.border}`,
                             background: t.bg3,
                             color: activeMode === m.id ? '#C9A84C' : t.text2,
@@ -91,21 +84,21 @@ function Chat({ activeMode, setActiveMode, theme }) {
                         {m.label}
                     </div>
                 ))}
-                <div style={{ marginLeft: 'auto', fontSize: '11px', color: t.text3 }}>
+                <div style={{ marginLeft:'auto', fontSize:'11px', color: t.text3 }}>
                     gemini-2.5-flash · Enter to send
                 </div>
             </div>
 
             {/* MESSAGES */}
-            <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '16px', paddingBottom: '16px' }}>
+            <div style={{ flex:1, overflowY:'auto', display:'flex', flexDirection:'column', gap:'16px', paddingBottom:'16px' }}>
                 {messages.map((msg, i) => (
-                    <div key={i} style={{ display: 'flex', justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start' }}>
+                    <div key={i} style={{ display:'flex', justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start' }}>
                         <div style={{
                             background: msg.role === 'user' ? t.bg3 : t.bg2,
                             border: `1px solid ${t.border}`,
-                            borderRadius: '12px', padding: '12px 16px',
-                            fontSize: '14px', color: t.text,
-                            maxWidth: '75%', lineHeight: '1.6',
+                            borderRadius:'12px', padding:'12px 16px',
+                            fontSize:'14px', color: t.text,
+                            maxWidth:'75%', lineHeight:'1.6',
                             whiteSpace: 'pre-wrap',
                         }}>
                             {msg.text}
@@ -113,12 +106,12 @@ function Chat({ activeMode, setActiveMode, theme }) {
                     </div>
                 ))}
                 {loading && (
-                    <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                    <div style={{ display:'flex', justifyContent:'flex-start' }}>
                         <div style={{
-                            background: t.bg2, border: `1px solid ${t.border}`,
-                            borderRadius: '12px', padding: '12px 16px',
-                            fontSize: '14px', color: '#C9A84C',
-                            letterSpacing: '4px',
+                            background: t.bg2, border:`1px solid ${t.border}`,
+                            borderRadius:'12px', padding:'12px 16px',
+                            fontSize:'14px', color:'#C9A84C',
+                            letterSpacing:'4px',
                         }}>
                             ● ● ●
                         </div>
@@ -128,17 +121,17 @@ function Chat({ activeMode, setActiveMode, theme }) {
             </div>
 
             {/* INPUT */}
-            <div style={{ borderTop: `1px solid ${t.border}`, paddingTop: '16px' }}>
+            <div style={{ borderTop:`1px solid ${t.border}`, paddingTop:'16px' }}>
                 <div style={{
-                    background: t.bg3, border: `1px solid ${t.border}`,
-                    borderRadius: '12px', padding: '12px 16px',
-                    display: 'flex', alignItems: 'center', gap: '10px',
+                    background: t.bg3, border:`1px solid ${t.border}`,
+                    borderRadius:'12px', padding:'12px 16px',
+                    display:'flex', alignItems:'center', gap:'10px',
                 }}>
                     <textarea
                         style={{
-                            flex: 1, background: 'none', border: 'none', outline: 'none',
-                            fontFamily: 'Geist,sans-serif', fontSize: '14px',
-                            color: t.text, resize: 'none',
+                            flex:1, background:'none', border:'none', outline:'none',
+                            fontFamily:'Geist,sans-serif', fontSize:'14px',
+                            color: t.text, resize:'none',
                         }}
                         placeholder="Ask anything... (Enter to send)"
                         value={input}
@@ -149,10 +142,10 @@ function Chat({ activeMode, setActiveMode, theme }) {
                     <div
                         onClick={sendMessage}
                         style={{
-                            width: '32px', height: '32px', borderRadius: '8px',
-                            background: '#C9A84C', color: '#0A0A0B',
-                            display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            cursor: 'pointer', fontSize: '14px', fontWeight: '700', flexShrink: 0,
+                            width:'32px', height:'32px', borderRadius:'8px',
+                            background:'#C9A84C', color:'#0A0A0B',
+                            display:'flex', alignItems:'center', justifyContent:'center',
+                            cursor:'pointer', fontSize:'14px', fontWeight:'700', flexShrink:0,
                         }}
                     >↑</div>
                 </div>
