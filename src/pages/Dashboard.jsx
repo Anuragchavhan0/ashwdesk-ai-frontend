@@ -20,8 +20,12 @@ function Dashboard() {
 
     useEffect(() => {
         API.get('/api/chat/count')
-            .then(res => setChatCount(res.data))
-            .catch(() => { })
+            .then(res => {
+                // ✅ Safety check — ensure it's a number
+                const count = typeof res.data === 'number' ? res.data : 0
+                setChatCount(count)
+            })
+            .catch(() => setChatCount(0))
     }, [])
 
     const handleLogout = () => {
